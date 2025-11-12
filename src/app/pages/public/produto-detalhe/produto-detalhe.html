@@ -1,0 +1,43 @@
+<div *ngIf="carregando" class="text-center mt-5">
+  <div class="spinner-border text-dark" role="status">
+    <span class="visually-hidden">Carregando...</span>
+  </div>
+</div>
+
+<div *ngIf="produtoNaoEncontrado" class="text-center mt-5">
+  <h2>Oops! Produto não encontrado</h2>
+  <p>Não conseguimos encontrar o cupcake que você está procurando.</p>
+  <a routerLink="/" class="btn btn-dark">Voltar ao Cardápio</a>
+</div>
+
+<div *ngIf="!carregando && produto" class="row g-5">
+  <div class="col-md-6">
+    <img
+      [src]="produto.caminho_imagem || 'https://via.placeholder.com/600x400.png?text=Cupcake'"
+      [alt]="produto.nome"
+      class="img-fluid rounded shadow-sm"
+    />
+  </div>
+
+  <div class="col-md-6">
+    <h2>{{ produto.nome }}</h2>
+
+    <h3 class="my-3 text-success fw-bold">
+      {{ produto.valor | currency : 'BRL' }}
+    </h3>
+
+    <p class="lead">{{ produto.ingredientes }}</p>
+
+    <ul class="list-unstyled mt-4">
+      <li><strong>Peso:</strong> {{ produto.peso }}g</li>
+      <li>Contém Glúten: {{ produto.contem_gluten ? 'Sim' : 'Não' }}</li>
+      <li>Contém Lactose: {{ produto.contem_lactose ? 'Sim' : 'Não' }}</li>
+      <li>Contém Leite: {{ produto.contem_leite ? 'Sim' : 'Não' }}</li>
+      <li>Contém Amendoim: {{ produto.contem_amendoim ? 'Sim' : 'Não' }}</li>
+    </ul>
+
+    <a [href]="getWhatsAppLink()" target="_blank" class="btn btn-success btn-lg mt-4">
+      <i class="bi bi-whatsapp"></i> Pedir pelo WhatsApp
+    </a>
+  </div>
+</div>

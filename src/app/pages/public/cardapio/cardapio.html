@@ -1,0 +1,36 @@
+<div *ngIf="carregando" class="text-center mt-5">
+  <div class="spinner-border text-dark" role="status">
+    <span class="visually-hidden">Carregando...</span>
+  </div>
+  <p class="mt-2">Buscando delícias...</p>
+</div>
+
+<div *ngIf="!carregando && listaProdutos.length === 0" class="text-center mt-5">
+  <h3>Oops!</h3>
+  <p>Nenhum cupcake foi encontrado no momento. Volte mais tarde!</p>
+</div>
+
+<div
+  *ngIf="!carregando && listaProdutos.length > 0"
+  class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"
+>
+  <div *ngFor="let produto of listaProdutos" class="col">
+    <div class="card h-100 shadow-sm">
+      <img
+        [src]="produto.caminho_imagem || 'https://via.placeholder.com/300x200.png?text=Cupcake'"
+        class="card-img-top"
+        [alt]="produto.nome"
+      />
+
+      <div class="card-body">
+        <h5 class="card-title">{{ produto.nome }}</h5>
+
+        <p class="card-text fw-bold text-success">
+          {{ produto.valor | currency : 'BRL' }}
+        </p>
+
+        <a [routerLink]="['/produto', produto.id_produto]" class="btn btn-dark"> Ver detalhes </a>
+      </div>
+    </div>
+  </div>
+</div>

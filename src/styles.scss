@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+.card-img-top {
+  // Efeito de zoom (você já tem)
+  transition: transform 0.3s ease;
+
+  // --- Adicione estas linhas ---
+  width: 100%; // Garante que ela ocupe toda a largura do card
+  height: 200px; // Define uma altura fixa (ajuste esse valor se quiser)
+  object-fit: cover; // A mágica: redimensiona a imagem para caber,
+  // cortando as sobras sem distorcer (como um "modo retrato")
+}
+
+.card-img-top:hover {
+  // Você já tem
+  transform: scale(1.1);
+}
