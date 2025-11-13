@@ -1,6 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">Delícias da May</a>
+    <a class="navbar-brand" routerLink="/">
+      <img src="assets/images/cupcake_logo.png" alt="I Love Cupcake Logo" class="cupcake-logo" />
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -10,10 +12,10 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a
-            class="nav-link"
+            class="nav-link text-white"
             routerLink="/"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -21,10 +23,12 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/sobre" routerLinkActive="active">Sobre</a>
+          <a class="nav-link text-white" routerLink="/sobre" routerLinkActive="active">Sobre</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/unidades" routerLinkActive="active">Unidades</a>
+          <a class="nav-link text-white" routerLink="/unidades" routerLinkActive="active"
+            >Unidades</a
+          >
         </li>
       </ul>
     </div>

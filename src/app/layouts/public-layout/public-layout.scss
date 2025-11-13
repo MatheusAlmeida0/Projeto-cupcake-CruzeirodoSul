@@ -1,0 +1,12 @@
+.cupcake-logo {
+  height: 100px;
+}
+
+.navbar-expand-lg {
+  background-color: #bde0e4;
+}
+
+.navbar-nav .nav-link.active {
+  color: white !important; // !important para sobrescrever o padrão do Bootstrap
+  font-weight: bold; // Opcional: para dar um destaque extra
+}

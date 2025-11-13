@@ -1,0 +1,20 @@
+.card-img-top {
+  transition: transform 0.3s ease;
+  width: 100%;
+  height: 300px;
+
+  object-position: center;
+}
+
+.card-img-top:hover {
+  transform: scale(1.1);
+}
+
+.btn {
+  background-color: #bde0e4;
+  color: white;
+}
+
+.card {
+  overflow: hidden;
+}
