@@ -1,0 +1,95 @@
+<div class="container my-5">
+  <h2 class="mb-4">Seu Carrinho de Compras</h2>
+
+  <ng-container *ngIf="cartItems$ | async as items">
+    <div *ngIf="items.length === 0" class="alert alert-info text-center" role="alert">
+      Seu carrinho está vazio.
+      <a routerLink="/" class="alert-link">Comece a comprar agora!</a>
+    </div>
+
+    <div *ngIf="items.length > 0">
+      <table class="table table-striped align-middle">
+        <thead>
+          <tr>
+            <th scope="col">Produto</th>
+            <th scope="col">Preço Unitário</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Subtotal</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>
+              <img
+                [src]="item.caminho_imagem"
+                alt="{{ item.nome }}"
+                class="img-thumbnail me-3"
+                style="width: 80px; height: 80px; object-fit: cover"
+              />
+              {{ item.nome }}
+            </td>
+            <td>{{ item.valor | currency : 'BRL' }}</td>
+            <td>
+              <input
+                type="number"
+                [value]="item.quantidade"
+                min="1"
+                (change)="updateQuantity($event, item.id_produto)"
+                class="form-control"
+                style="width: 70px"
+              />
+            </td>
+            <td>{{ item.valor * item.quantidade | currency : 'BRL' }}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="abrirModalRemocao(item)">
+                <i class="bi bi-trash"></i> Remover
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="text-end fw-bold">Total do Carrinho:</td>
+            <td class="fw-bold">{{ cartTotal$ | async | currency : 'BRL' }}</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="d-flex justify-content-between mt-4">
+        <a routerLink="/" class="btn btn-secondary btn-lg button-voltar-cardapio"
+          >Continuar Comprando</a
+        >
+        <button class="btn btn-success btn-lg" (click)="proceedToCheckout()">
+          Concluir Compra <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<div
+  class="modal fade"
+  id="confirmRemoveItemModal"
+  tabindex="-1"
+  aria-labelledby="confirmRemoveItemModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmRemoveItemModalLabel">Remover Item do Carrinho</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja remover <strong>"{{ itemParaRemover?.nome }}"</strong> do seu
+        carrinho?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="confirmarRemocao()">Remover</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,8 +11,8 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav">
         <li class="nav-item">
           <a
             class="nav-link text-white"
@@ -29,6 +29,20 @@
           <a class="nav-link text-white" routerLink="/unidades" routerLinkActive="active"
             >Unidades</a
           >
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-white position-relative" routerLink="/carrinho">
+            <i class="bi bi-cart lg"></i>
+            <span
+              *ngIf="cartItemCount > 0"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              {{ cartItemCount }}
+              <span class="visually-hidden">itens no carrinho</span>
+            </span>
+          </a>
         </li>
       </ul>
     </div>

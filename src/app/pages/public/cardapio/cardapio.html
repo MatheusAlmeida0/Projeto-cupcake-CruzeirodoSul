@@ -2,7 +2,7 @@
   <div class="spinner-border text-dark" role="status">
     <span class="visually-hidden">Carregando...</span>
   </div>
-  <p class="mt-2">Buscando delícias...</p>
+  <p class="mt-2">Buscando delícias... Isso pode levar alguns minutos.</p>
 </div>
 
 <div *ngIf="!carregando && listaProdutos.length === 0" class="text-center mt-5">
@@ -25,11 +25,12 @@
       <div class="card-body">
         <h5 class="card-title">{{ produto.nome }}</h5>
 
-        <p class="card-text fw-bold text-success">
+        <p class="card-text fw-bold">
           {{ produto.valor | currency : 'BRL' }}
         </p>
 
-        <a [routerLink]="['/produto', produto.id_produto]" class="btn"> Ver detalhes </a>
+        <a [routerLink]="['/produto', produto.id_produto]" class="btn me-2"> Ver detalhes </a>
+        <button (click)="addToCart(produto)" class="btn">Adicionar ao Carrinho</button>
       </div>
     </div>
   </div>

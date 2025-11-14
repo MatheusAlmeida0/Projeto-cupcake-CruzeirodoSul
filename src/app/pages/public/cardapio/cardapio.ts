@@ -1,26 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CartService } from '../../../services/cart.service'; // Importe o CartService
 import { ApiService } from '../../../services/api';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-cardapio',
   standalone: true,
-  // 1. Importe CommonModule e RouterModule
   imports: [CommonModule, RouterModule],
   templateUrl: './cardapio.html',
   styleUrl: './cardapio.scss',
 })
 export class CardapioComponent implements OnInit {
-  // 2. Crie uma variável para guardar a lista de produtos
   public listaProdutos: any[] = [];
   public carregando: boolean = true;
 
-  // 3. Injete o ApiService no construtor
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private cartService: CartService,
+    private notificationService: NotificationService
+  ) {}
 
-  // 4. Use o ngOnInit para chamar a API quando o componente carregar
   ngOnInit(): void {
     this.apiService.getProdutos().subscribe({
       next: (data) => {
@@ -33,5 +34,10 @@ export class CardapioComponent implements OnInit {
         this.carregando = false;
       },
     });
+  }
+
+  public addToCart(produto: any): void {
+    this.cartService.addToCart(produto);
+    this.notificationService.showSuccess('Produto adicionado ao carrinho!.');
   }
 }

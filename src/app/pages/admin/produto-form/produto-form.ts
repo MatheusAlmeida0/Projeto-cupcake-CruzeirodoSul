@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../services/api';
 import { CommonModule } from '@angular/common';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-produto-form',
@@ -21,10 +22,10 @@ export class ProdutoFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    private route: ActivatedRoute, // Para ler o ID da URL
-    private router: Router // Para navegar após salvar
+    private route: ActivatedRoute,
+    private router: Router,
+    private notificationService: NotificationService
   ) {
-    // 2. Crie a estrutura do formulário
     this.produtoForm = this.fb.group({
       nome: ['', Validators.required],
       peso: [0, Validators.required],
@@ -39,16 +40,14 @@ export class ProdutoFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // 3. Verifique se há um ID na rota (modo de edição)
     this.produtoId = this.route.snapshot.paramMap.get('id');
 
     if (this.produtoId) {
       this.isEditMode = true;
       this.isLoading = true;
-      // 4. Se for edição, busque o produto na API
+
       this.apiService.getProdutoById(this.produtoId).subscribe({
         next: (data) => {
-          // 5. Preencha o formulário com os dados
           this.produtoForm.patchValue(data);
           this.isLoading = false;
         },
@@ -59,13 +58,11 @@ export class ProdutoFormComponent implements OnInit {
         },
       });
     }
-    // Se não houver ID, é o modo "novo" e o formulário fica em branco.
   }
 
-  // 6. Função chamada ao enviar o formulário
   public onSubmit(): void {
     if (this.produtoForm.invalid) {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+      this.notificationService.showSuccess(`Por favor, preencha todos os campos obrigatórios.`);
       return;
     }
 
@@ -74,11 +71,10 @@ export class ProdutoFormComponent implements OnInit {
     const produtoData = this.produtoForm.value;
 
     if (this.isEditMode && this.produtoId) {
-      // --- MODO EDIÇÃO ---
       this.apiService.updateProduto(this.produtoId, produtoData).subscribe({
         next: () => {
-          alert('Produto atualizado com sucesso!');
-          this.router.navigate(['/admin/produtos']); // Volta para a lista
+          this.notificationService.showSuccess(`Produto atualizado com sucesso!`);
+          this.router.navigate(['/admin/produtos']);
         },
         error: (err) => {
           console.error(err);
@@ -87,11 +83,10 @@ export class ProdutoFormComponent implements OnInit {
         },
       });
     } else {
-      // --- MODO CRIAÇÃO ---
       this.apiService.createProduto(produtoData).subscribe({
         next: () => {
-          alert('Produto criado com sucesso!');
-          this.router.navigate(['/admin/produtos']); // Volta para a lista
+          this.notificationService.showSuccess(`Produto criado com sucesso!`);
+          this.router.navigate(['/admin/produtos']);
         },
         error: (err) => {
           console.error(err);

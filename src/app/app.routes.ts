@@ -7,6 +7,8 @@ import { SobreComponent } from './pages/public/sobre/sobre';
 import { UnidadesComponent } from './pages/public/unidades/unidades';
 import { ProdutoListComponent } from './pages/admin/produto-list/produto-list';
 import { ProdutoFormComponent } from './pages/admin/produto-form/produto-form';
+import { CartComponent } from './pages/public/cart/cart';
+import { CheckoutComponent } from './pages/public/checkout/checkout';
 
 export const routes: Routes = [
   {
@@ -17,6 +19,8 @@ export const routes: Routes = [
       { path: 'sobre', component: SobreComponent },
       { path: 'unidades', component: UnidadesComponent },
       { path: 'produto/:id', component: ProdutoDetalheComponent },
+      { path: 'carrinho', component: CartComponent }, // <--- AGORA ESTÃO AQUI!
+      { path: 'checkout', component: CheckoutComponent }, // <--- E AQUI!
     ],
   },
 
@@ -30,6 +34,4 @@ export const routes: Routes = [
       { path: 'produtos/editar/:id', component: ProdutoFormComponent },
     ],
   },
-
-  // { path: '**', component: NotFoundComponent } // Rota 404
 ];
