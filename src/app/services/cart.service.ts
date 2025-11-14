@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators'; // Adicione map
+import { map } from 'rxjs/operators';
 
 interface CartItem {
   id_produto: number;
@@ -17,22 +17,16 @@ export class CartService {
   private cartItems: CartItem[] = [];
   private cartSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject(this.cartItems);
 
-  constructor() {
-    // REMOVA OU COMENTE ESTA LINHA PARA QUE O CARRINHO SEJA SEMPRE LIMPO AO RECARREGAR
-    // this.loadCartFromLocalStorage();
-  }
+  constructor() {}
 
   public getCart(): Observable<CartItem[]> {
     return this.cartSubject.asObservable();
   }
 
-  // Obtém a contagem total de itens (tipos de produtos) no carrinho
   public getCartItemCount(): Observable<number> {
-    // Usando o operador map do rxjs para simplificar
     return this.cartSubject.asObservable().pipe(map((items) => items.length));
   }
 
-  // Adiciona um produto ao carrinho
   public addToCart(produto: any): void {
     const existingItem = this.cartItems.find((item) => item.id_produto === produto.id_produto);
 
@@ -47,36 +41,31 @@ export class CartService {
         quantidade: 1,
       });
     }
-    this.updateCartSubject(); // Apenas atualiza o Subject, sem localStorage
+    this.updateCartSubject();
   }
 
-  // Remove completamente um tipo de produto do carrinho
   public removeItem(id_produto: number): void {
     this.cartItems = this.cartItems.filter((item) => item.id_produto !== id_produto);
-    this.updateCartSubject(); // Apenas atualiza o Subject, sem localStorage
+    this.updateCartSubject();
   }
 
-  // Atualiza a quantidade de um item no carrinho
   public updateItemQuantity(id_produto: number, quantidade: number): void {
     const item = this.cartItems.find((i) => i.id_produto === id_produto);
     if (item) {
       if (quantidade <= 0) {
-        this.removeItem(id_produto); // Se a quantidade for 0 ou menos, remove o item
+        this.removeItem(id_produto);
       } else {
         item.quantidade = quantidade;
-        this.updateCartSubject(); // Apenas atualiza o Subject, sem localStorage
+        this.updateCartSubject();
       }
     }
   }
 
-  // Limpa todo o carrinho
   public clearCart(): void {
     this.cartItems = [];
-    this.updateCartSubject(); // Apenas atualiza o Subject, sem localStorage
-    // REMOVA OU COMENTE: localStorage.removeItem('cupcake_cart'); // Não precisamos mais disso
+    this.updateCartSubject();
   }
 
-  // Calcula o total do carrinho
   public getCartTotal(): Observable<number> {
     return this.cartSubject
       .asObservable()

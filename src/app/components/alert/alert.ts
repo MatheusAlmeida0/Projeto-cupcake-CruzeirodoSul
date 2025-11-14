@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NotificationService, Notification } from '../../services/notification.service'; // Ajuste o caminho
+import { NotificationService, Notification } from '../../services/notification.service';
 import { Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common'; // Importar CommonModule para *ngIf
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-alert',
-  standalone: true, // Se for um standalone component
-  imports: [CommonModule], // Adicionar CommonModule aqui se standalone
+  standalone: true,
+  imports: [CommonModule],
   template: `
     <div
       *ngIf="notification"
@@ -27,7 +27,7 @@ import { CommonModule } from '@angular/common'; // Importar CommonModule para *n
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 1050; /* Z-index alto para ficar acima de outros elementos */
+      z-index: 1050;
       min-width: 300px;
       max-width: 90%;
     }
@@ -43,7 +43,6 @@ export class AlertComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.notificationSubscription = this.notificationService.notification$.subscribe(
       (notification) => {
-        // Limpa qualquer timeout anterior para nova notificação
         this.clearNotification();
 
         this.notification = notification;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { CartService } from '../../../services/cart.service'; // Importe o CartService
+import { CartService } from '../../../services/cart.service';
 import { ApiService } from '../../../services/api';
 import { NotificationService } from '../../../services/notification.service';
 

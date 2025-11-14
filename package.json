@@ -6,8 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "test:jest": "jest"
+    "test": "ng test"
   },
   "prettier": {
     "printWidth": 100,
@@ -37,6 +36,7 @@
   },
   "devDependencies": {
     "@angular-builders/jest": "^20.0.0",
+    "@angular-eslint/schematics": "^20.6.0",
     "@angular/build": "^20.3.9",
     "@angular/cli": "^20.3.9",
     "@angular/compiler-cli": "^20.3.0",

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Necessário para *ngIf e async pipe
-import { CartService } from '../../services/cart.service'; // Importe o CartService
+import { CommonModule } from '@angular/common';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-public-layout',
@@ -13,7 +13,7 @@ import { CartService } from '../../services/cart.service'; // Importe o CartServ
 export class PublicLayoutComponent implements OnInit {
   cartItemCount: number = 0;
 
-  constructor(private cartService: CartService) {} // Injete o CartService
+  constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
     this.cartService.getCartItemCount().subscribe((count) => {

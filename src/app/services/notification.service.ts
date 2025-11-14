@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-// Interface para definir o formato da nossa notificação
 export interface Notification {
   message: string;
-  type: 'success' | 'danger' | 'warning' | 'info'; // Tipos de alert do Bootstrap
-  duration?: number; // Opcional: tempo em ms para fechar automaticamente
+  type: 'success' | 'danger' | 'warning' | 'info';
+  duration?: number;
 }
 
 @Injectable({

@@ -19,8 +19,8 @@ export const routes: Routes = [
       { path: 'sobre', component: SobreComponent },
       { path: 'unidades', component: UnidadesComponent },
       { path: 'produto/:id', component: ProdutoDetalheComponent },
-      { path: 'carrinho', component: CartComponent }, // <--- AGORA ESTÃO AQUI!
-      { path: 'checkout', component: CheckoutComponent }, // <--- E AQUI!
+      { path: 'carrinho', component: CartComponent },
+      { path: 'checkout', component: CheckoutComponent },
     ],
   },
 
