@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "deploy:ghpages": "ng deploy --base-href=/CupcakeStoreFrontEnd/",
+    "deploy:ghpages": "ng build --configuration production --base-href=/CupcakeStoreFrontEnd/ && angular-cli-ghpages --dir=dist/loja-cupcakes-ui/browser",
     "test": "ng test"
   },
   "prettier": {
