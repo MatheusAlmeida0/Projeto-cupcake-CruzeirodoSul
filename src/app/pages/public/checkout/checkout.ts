@@ -34,7 +34,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   private generateWhatsAppLink(): void {
-    const numeroTelefone = '5511962108331';
+    const numeroTelefone = '5518996456473';
     let message = `Olá! Meu pedido #${this.orderId} é o seguinte:\n\n`;
 
     const currencyFormatter = new Intl.NumberFormat('pt-BR', {
